@@ -1,0 +1,5042 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>SuppressFilterElement.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>///////////////////////////////////////////////////////////////////////////////////////////////</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// checkstyle: Checks Java source code and other text files for adherence to a set of rules.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Copyright (C) 2001-2022 the original author or authors.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>//</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// This library is free software; you can redistribute it and/or</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// modify it under the terms of the GNU Lesser General Public</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// License as published by the Free Software Foundation; either</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// version 2.1 of the License, or (at your option) any later version.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>//</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// This library is distributed in the hope that it will be useful,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// but WITHOUT ANY WARRANTY; without even the implied warranty of</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Lesser General Public License for more details.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>//</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// You should have received a copy of the GNU Lesser General Public</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// License along with this library; if not, write to the Free Software</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>///////////////////////////////////////////////////////////////////////////////////////////////</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package com.puppycrawl.tools.checkstyle.filters;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Objects;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.regex.Pattern;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.puppycrawl.tools.checkstyle.api.AuditEvent;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.puppycrawl.tools.checkstyle.api.Filter;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * This filter element is immutable and processes {@link AuditEvent}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * objects based on the criteria of file, check, module id, line, and</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * column. It rejects an AuditEvent if the following match:</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;ul&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *   &#60;li&#62;the event&#39;s file name; and&#60;/li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *   &#60;li&#62;the check name or the module identifier; and&#60;/li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *   &#60;li&#62;(optionally) the event&#39;s line is in the filter&#39;s line CSV; and&#60;/li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *   &#60;li&#62;(optionally) the check&#39;s columns is in the filter&#39;s column CSV.&#60;/li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;/ul&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class SuppressFilterElement</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    implements Filter {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** The regexp to match file names against. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final Pattern fileRegexp;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** The pattern for file names. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final String filePattern;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** The regexp to match check names against. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final Pattern checkRegexp;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** The pattern for check class names. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final String checkPattern;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** The regexp to match message names against. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final Pattern messageRegexp;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** The pattern for message names. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final String messagePattern;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_61'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** Module id filter. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final String moduleId;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** Line number filter. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final CsvFilterElement lineFilter;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_67'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** CSV for line number filter. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_68'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final String linesCsv;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** Column number filter. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final CsvFilterElement columnFilter;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_73'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** CSV for column number filter. */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final String columnsCsv;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_77'/>
+77
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_77'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Constructs a {@code SuppressFilterElement} for a</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * file name pattern.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_79'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_80'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param files   regular expression for names of filtered files.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_81'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param checks  regular expression for filtered check classes.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_82'/>
+82
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_82'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param message regular expression for messages.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_83'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param modId   the id</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param lines   lines CSV values and ranges for line number filtering.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_85'/>
+85
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_85'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param columns columns CSV values and ranges for column number filtering.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_86'/>
+86
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_86'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_87'/>
+87
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_87'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public SuppressFilterElement(String files, String checks,</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_88'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                           String message, String modId, String lines, String columns) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_89'/>
+89
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_89'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable filePattern &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        filePattern = files;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_90'/>
+90
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_90'>3</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+2. &#60;init&#62; : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+3. &#60;init&#62; : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (files == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_91'/>
+91
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_91'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable fileRegexp &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            fileRegexp = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_92'/>
+92
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_92'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_93'/>
+93
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_93'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_94'/>
+94
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_94'>2</a>
+<span>
+
+1. &#60;init&#62; : removed call to java/util/regex/Pattern::compile &rarr; KILLED<br/>
+
+2. &#60;init&#62; : Removed assignment to member variable fileRegexp &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            fileRegexp = Pattern.compile(files);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_95'/>
+95
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_95'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_96'/>
+96
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_96'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable checkPattern &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        checkPattern = checks;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_97'/>
+97
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_97'>3</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+2. &#60;init&#62; : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+3. &#60;init&#62; : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (checks == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_98'/>
+98
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_98'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable checkRegexp &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            checkRegexp = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_99'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_100'/>
+100
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_100'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_101'/>
+101
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_101'>2</a>
+<span>
+
+1. &#60;init&#62; : removed call to java/util/regex/Pattern::compile &rarr; KILLED<br/>
+
+2. &#60;init&#62; : Removed assignment to member variable checkRegexp &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            checkRegexp = Pattern.compile(checks);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_102'/>
+102
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_102'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_103'/>
+103
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_103'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable messagePattern &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        messagePattern = message;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_104'/>
+104
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_104'>3</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+2. &#60;init&#62; : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+3. &#60;init&#62; : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (message == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_105'/>
+105
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_105'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable messageRegexp &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            messageRegexp = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_106'/>
+106
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_106'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_107'/>
+107
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_107'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_108'/>
+108
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_108'>2</a>
+<span>
+
+1. &#60;init&#62; : removed call to java/util/regex/Pattern::compile &rarr; KILLED<br/>
+
+2. &#60;init&#62; : Removed assignment to member variable messageRegexp &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            messageRegexp = Pattern.compile(message);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_109'/>
+109
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_109'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_110'/>
+110
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_110'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable moduleId &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        moduleId = modId;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_111'/>
+111
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_111'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable linesCsv &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        linesCsv = lines;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_112'/>
+112
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_112'>3</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+2. &#60;init&#62; : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+3. &#60;init&#62; : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (lines == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_113'/>
+113
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_113'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable lineFilter &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            lineFilter = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_114'/>
+114
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_114'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_115'/>
+115
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_115'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_116'/>
+116
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_116'>2</a>
+<span>
+
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::&#60;init&#62; &rarr; KILLED<br/>
+
+2. &#60;init&#62; : Removed assignment to member variable lineFilter &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            lineFilter = new CsvFilterElement(lines);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_117'/>
+117
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_117'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_118'/>
+118
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_118'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable columnsCsv &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        columnsCsv = columns;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_119'/>
+119
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_119'>3</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+2. &#60;init&#62; : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+3. &#60;init&#62; : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (columns == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_120'/>
+120
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_120'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable columnFilter &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            columnFilter = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_121'/>
+121
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_121'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_122'/>
+122
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_122'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_123'/>
+123
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_123'>2</a>
+<span>
+
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::&#60;init&#62; &rarr; KILLED<br/>
+
+2. &#60;init&#62; : Removed assignment to member variable columnFilter &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            columnFilter = new CsvFilterElement(columns);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_124'/>
+124
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_124'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_125'/>
+125
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_125'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_126'/>
+126
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_126'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_127'/>
+127
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_127'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_128'/>
+128
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_128'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Creates a {@code SuppressFilterElement} instance.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_129'/>
+129
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_129'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_130'/>
+130
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_130'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param files regular expression for filtered file names</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_131'/>
+131
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_131'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param checks regular expression for filtered check classes</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_132'/>
+132
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_132'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param message regular expression for messages.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_133'/>
+133
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_133'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param moduleId the module id</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_134'/>
+134
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_134'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param lines CSV for lines</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_135'/>
+135
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_135'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param columns CSV for columns</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_136'/>
+136
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_136'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_137'/>
+137
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_137'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public SuppressFilterElement(Pattern files, Pattern checks, Pattern message, String moduleId,</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_138'/>
+138
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_138'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            String lines, String columns) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_139'/>
+139
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_139'>3</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+2. &#60;init&#62; : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+3. &#60;init&#62; : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (files == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_140'/>
+140
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_140'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable filePattern &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            filePattern = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_141'/>
+141
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_141'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable fileRegexp &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            fileRegexp = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_142'/>
+142
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_142'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_143'/>
+143
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_143'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_144'/>
+144
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_144'>2</a>
+<span>
+
+1. &#60;init&#62; : removed call to java/util/regex/Pattern::pattern &rarr; SURVIVED<br/>
+
+2. &#60;init&#62; : Removed assignment to member variable filePattern &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            filePattern = files.pattern();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_145'/>
+145
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_145'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable fileRegexp &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            fileRegexp = files;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_146'/>
+146
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_146'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_147'/>
+147
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_147'>3</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+2. &#60;init&#62; : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+3. &#60;init&#62; : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (checks == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_148'/>
+148
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_148'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable checkPattern &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            checkPattern = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_149'/>
+149
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_149'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable checkRegexp &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            checkRegexp = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_150'/>
+150
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_150'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_151'/>
+151
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_151'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_152'/>
+152
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_152'>2</a>
+<span>
+
+1. &#60;init&#62; : removed call to java/util/regex/Pattern::pattern &rarr; SURVIVED<br/>
+
+2. &#60;init&#62; : Removed assignment to member variable checkPattern &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            checkPattern = checks.pattern();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_153'/>
+153
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_153'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable checkRegexp &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            checkRegexp = checks;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_154'/>
+154
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_154'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_155'/>
+155
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_155'>3</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+2. &#60;init&#62; : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+3. &#60;init&#62; : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (message == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_156'/>
+156
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_156'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable messagePattern &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            messagePattern = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_157'/>
+157
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_157'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable messageRegexp &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            messageRegexp = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_158'/>
+158
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_158'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_159'/>
+159
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_159'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_160'/>
+160
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_160'>2</a>
+<span>
+
+1. &#60;init&#62; : removed call to java/util/regex/Pattern::pattern &rarr; SURVIVED<br/>
+
+2. &#60;init&#62; : Removed assignment to member variable messagePattern &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            messagePattern = message.pattern();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_161'/>
+161
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_161'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable messageRegexp &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            messageRegexp = message;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_162'/>
+162
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_162'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_163'/>
+163
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_163'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable moduleId &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        this.moduleId = moduleId;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_164'/>
+164
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_164'>3</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+2. &#60;init&#62; : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+3. &#60;init&#62; : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (lines == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_165'/>
+165
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_165'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable linesCsv &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            linesCsv = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_166'/>
+166
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_166'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable lineFilter &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            lineFilter = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_167'/>
+167
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_167'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_168'/>
+168
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_168'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_169'/>
+169
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_169'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable linesCsv &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            linesCsv = lines;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_170'/>
+170
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_170'>2</a>
+<span>
+
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::&#60;init&#62; &rarr; KILLED<br/>
+
+2. &#60;init&#62; : Removed assignment to member variable lineFilter &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            lineFilter = new CsvFilterElement(lines);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_171'/>
+171
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_171'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_172'/>
+172
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_172'>3</a>
+<span>
+
+1. &#60;init&#62; : negated conditional &rarr; KILLED<br/>
+
+2. &#60;init&#62; : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+3. &#60;init&#62; : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (columns == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_173'/>
+173
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_173'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable columnsCsv &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            columnsCsv = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_174'/>
+174
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_174'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable columnFilter &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            columnFilter = null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_175'/>
+175
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_175'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_176'/>
+176
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_176'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_177'/>
+177
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_177'>1</a>
+<span>
+
+1. &#60;init&#62; : Removed assignment to member variable columnsCsv &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            columnsCsv = columns;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_178'/>
+178
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_178'>2</a>
+<span>
+
+1. &#60;init&#62; : removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::&#60;init&#62; &rarr; KILLED<br/>
+
+2. &#60;init&#62; : Removed assignment to member variable columnFilter &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            columnFilter = new CsvFilterElement(columns);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_179'/>
+179
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_179'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_180'/>
+180
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_180'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_181'/>
+181
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_181'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_182'/>
+182
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_182'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_183'/>
+183
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_183'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean accept(AuditEvent event) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_184'/>
+184
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_184'>5</a>
+<span>
+
+1. accept : negated conditional &rarr; KILLED<br/>
+
+2. accept : removed call to com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isFileNameAndModuleNameMatching &rarr; KILLED<br/>
+
+3. accept : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+4. accept : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+5. accept : replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::accept &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return !isFileNameAndModuleNameMatching(event)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_185'/>
+185
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_185'>4</a>
+<span>
+
+1. accept : negated conditional &rarr; KILLED<br/>
+
+2. accept : removed call to com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isMessageNameMatching &rarr; KILLED<br/>
+
+3. accept : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+4. accept : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                || !isMessageNameMatching(event)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_186'/>
+186
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_186'>4</a>
+<span>
+
+1. accept : negated conditional &rarr; KILLED<br/>
+
+2. accept : removed call to com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isLineAndColumnMatching &rarr; KILLED<br/>
+
+3. accept : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+4. accept : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                || !isLineAndColumnMatching(event);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_187'/>
+187
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_187'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_188'/>
+188
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_188'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_189'/>
+189
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_189'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_190'/>
+190
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_190'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Is matching by file name, module id, and Check name.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_191'/>
+191
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_191'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_192'/>
+192
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_192'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param event event</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_193'/>
+193
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_193'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return true if it is matching</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_194'/>
+194
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_194'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_195'/>
+195
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_195'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private boolean isFileNameAndModuleNameMatching(AuditEvent event) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_196'/>
+196
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_196'>8</a>
+<span>
+
+1. isFileNameAndModuleNameMatching : negated conditional &rarr; KILLED<br/>
+
+2. isFileNameAndModuleNameMatching : negated conditional &rarr; KILLED<br/>
+
+3. isFileNameAndModuleNameMatching : removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getFileName &rarr; KILLED<br/>
+
+4. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+5. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+6. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+7. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+8. isFileNameAndModuleNameMatching : replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isFileNameAndModuleNameMatching &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return event.getFileName() != null</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_197'/>
+197
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_197'>6</a>
+<span>
+
+1. isFileNameAndModuleNameMatching : negated conditional &rarr; KILLED<br/>
+
+2. isFileNameAndModuleNameMatching : removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getFileName &rarr; KILLED<br/>
+
+3. isFileNameAndModuleNameMatching : removed call to java/util/regex/Pattern::matcher &rarr; KILLED<br/>
+
+4. isFileNameAndModuleNameMatching : removed call to java/util/regex/Matcher::find &rarr; KILLED<br/>
+
+5. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+6. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                &#38;&#38; (fileRegexp == null || fileRegexp.matcher(event.getFileName()).find())</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_198'/>
+198
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_198'>7</a>
+<span>
+
+1. isFileNameAndModuleNameMatching : negated conditional &rarr; KILLED<br/>
+
+2. isFileNameAndModuleNameMatching : negated conditional &rarr; KILLED<br/>
+
+3. isFileNameAndModuleNameMatching : removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getViolation &rarr; KILLED<br/>
+
+4. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+5. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+6. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+7. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                &#38;&#38; event.getViolation() != null</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_199'/>
+199
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_199'>8</a>
+<span>
+
+1. isFileNameAndModuleNameMatching : negated conditional &rarr; KILLED<br/>
+
+2. isFileNameAndModuleNameMatching : negated conditional &rarr; KILLED<br/>
+
+3. isFileNameAndModuleNameMatching : removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getModuleId &rarr; KILLED<br/>
+
+4. isFileNameAndModuleNameMatching : removed call to java/lang/String::equals &rarr; KILLED<br/>
+
+5. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+6. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+7. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+8. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                &#38;&#38; (moduleId == null || moduleId.equals(event.getModuleId()))</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_200'/>
+200
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_200'>6</a>
+<span>
+
+1. isFileNameAndModuleNameMatching : negated conditional &rarr; KILLED<br/>
+
+2. isFileNameAndModuleNameMatching : removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getSourceName &rarr; KILLED<br/>
+
+3. isFileNameAndModuleNameMatching : removed call to java/util/regex/Pattern::matcher &rarr; KILLED<br/>
+
+4. isFileNameAndModuleNameMatching : removed call to java/util/regex/Matcher::find &rarr; KILLED<br/>
+
+5. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+6. isFileNameAndModuleNameMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                &#38;&#38; (checkRegexp == null || checkRegexp.matcher(event.getSourceName()).find());</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_201'/>
+201
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_201'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_202'/>
+202
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_202'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_203'/>
+203
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_203'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_204'/>
+204
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_204'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Is matching by message.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_205'/>
+205
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_205'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_206'/>
+206
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_206'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param event event</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_207'/>
+207
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_207'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return true if it is matching or not set.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_208'/>
+208
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_208'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_209'/>
+209
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_209'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private boolean isMessageNameMatching(AuditEvent event) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_210'/>
+210
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_210'>10</a>
+<span>
+
+1. isMessageNameMatching : negated conditional &rarr; KILLED<br/>
+
+2. isMessageNameMatching : negated conditional &rarr; KILLED<br/>
+
+3. isMessageNameMatching : removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getMessage &rarr; KILLED<br/>
+
+4. isMessageNameMatching : removed call to java/util/regex/Pattern::matcher &rarr; KILLED<br/>
+
+5. isMessageNameMatching : removed call to java/util/regex/Matcher::find &rarr; KILLED<br/>
+
+6. isMessageNameMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+7. isMessageNameMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+8. isMessageNameMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+9. isMessageNameMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+10. isMessageNameMatching : replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isMessageNameMatching &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return messageRegexp == null || messageRegexp.matcher(event.getMessage()).find();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_211'/>
+211
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_211'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_212'/>
+212
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_212'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_213'/>
+213
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_213'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_214'/>
+214
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_214'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Whether line and column match.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_215'/>
+215
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_215'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_216'/>
+216
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_216'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param event event to process.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_217'/>
+217
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_217'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return true if line and column are matching or not set.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_218'/>
+218
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_218'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_219'/>
+219
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_219'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private boolean isLineAndColumnMatching(AuditEvent event) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_220'/>
+220
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_220'>10</a>
+<span>
+
+1. isLineAndColumnMatching : negated conditional &rarr; KILLED<br/>
+
+2. isLineAndColumnMatching : negated conditional &rarr; KILLED<br/>
+
+3. isLineAndColumnMatching : negated conditional &rarr; KILLED<br/>
+
+4. isLineAndColumnMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+5. isLineAndColumnMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+6. isLineAndColumnMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+7. isLineAndColumnMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+8. isLineAndColumnMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+9. isLineAndColumnMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+10. isLineAndColumnMatching : replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isLineAndColumnMatching &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return lineFilter == null &#38;&#38; columnFilter == null</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_221'/>
+221
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_221'>8</a>
+<span>
+
+1. isLineAndColumnMatching : negated conditional &rarr; KILLED<br/>
+
+2. isLineAndColumnMatching : negated conditional &rarr; KILLED<br/>
+
+3. isLineAndColumnMatching : removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getLine &rarr; KILLED<br/>
+
+4. isLineAndColumnMatching : removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::accept &rarr; KILLED<br/>
+
+5. isLineAndColumnMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+6. isLineAndColumnMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+7. isLineAndColumnMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+8. isLineAndColumnMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                || lineFilter != null &#38;&#38; lineFilter.accept(event.getLine())</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_222'/>
+222
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_222'>5</a>
+<span>
+
+1. isLineAndColumnMatching : negated conditional &rarr; KILLED<br/>
+
+2. isLineAndColumnMatching : removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getColumn &rarr; KILLED<br/>
+
+3. isLineAndColumnMatching : removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::accept &rarr; KILLED<br/>
+
+4. isLineAndColumnMatching : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+5. isLineAndColumnMatching : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                || columnFilter != null &#38;&#38; columnFilter.accept(event.getColumn());</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_223'/>
+223
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_223'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_224'/>
+224
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_224'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_225'/>
+225
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_225'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_226'/>
+226
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_226'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int hashCode() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_227'/>
+227
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_227'>2</a>
+<span>
+
+1. hashCode : removed call to java/util/Objects::hash &rarr; KILLED<br/>
+
+2. hashCode : replaced int return with 0 for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::hashCode &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return Objects.hash(filePattern, checkPattern, messagePattern, moduleId, linesCsv,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_228'/>
+228
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_228'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                columnsCsv);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_229'/>
+229
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_229'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_230'/>
+230
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_230'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_231'/>
+231
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_231'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_232'/>
+232
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_232'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean equals(Object other) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_233'/>
+233
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_233'>2</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (this == other) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_234'/>
+234
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_234'>1</a>
+<span>
+
+1. equals : replaced boolean return with false for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::equals &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return true;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_235'/>
+235
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_235'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_236'/>
+236
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_236'>8</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : negated conditional &rarr; KILLED<br/>
+
+3. equals : removed call to java/lang/Object::getClass &rarr; KILLED<br/>
+
+4. equals : removed call to java/lang/Object::getClass &rarr; KILLED<br/>
+
+5. equals : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+6. equals : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+7. equals : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+8. equals : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (other == null || getClass() != other.getClass()) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_237'/>
+237
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_237'>1</a>
+<span>
+
+1. equals : replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::equals &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return false;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_238'/>
+238
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_238'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_239'/>
+239
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_239'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        final SuppressFilterElement suppressElement = (SuppressFilterElement) other;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_240'/>
+240
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_240'>5</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : removed call to java/util/Objects::equals &rarr; KILLED<br/>
+
+3. equals : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+4. equals : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+5. equals : replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::equals &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return Objects.equals(filePattern, suppressElement.filePattern)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_241'/>
+241
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_241'>4</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : removed call to java/util/Objects::equals &rarr; KILLED<br/>
+
+3. equals : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+4. equals : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                &#38;&#38; Objects.equals(checkPattern, suppressElement.checkPattern)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_242'/>
+242
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_242'>4</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : removed call to java/util/Objects::equals &rarr; KILLED<br/>
+
+3. equals : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+4. equals : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                &#38;&#38; Objects.equals(messagePattern, suppressElement.messagePattern)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_243'/>
+243
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_243'>4</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : removed call to java/util/Objects::equals &rarr; KILLED<br/>
+
+3. equals : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+4. equals : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                &#38;&#38; Objects.equals(moduleId, suppressElement.moduleId)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_244'/>
+244
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_244'>4</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : removed call to java/util/Objects::equals &rarr; KILLED<br/>
+
+3. equals : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+4. equals : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                &#38;&#38; Objects.equals(linesCsv, suppressElement.linesCsv)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_245'/>
+245
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_245'>4</a>
+<span>
+
+1. equals : negated conditional &rarr; KILLED<br/>
+
+2. equals : removed call to java/util/Objects::equals &rarr; KILLED<br/>
+
+3. equals : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+4. equals : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                &#38;&#38; Objects.equals(columnsCsv, suppressElement.columnsCsv);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_246'/>
+246
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_246'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_247'/>
+247
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_247'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@53073395_248'/>
+248
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@53073395_248'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_89'>89</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_89'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable filePattern &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_90'>90</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_90'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpNotMatch</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpNotMatch</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_91'>91</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_91'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable fileRegexp &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_94'>94</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_94'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpNotMatch</span></span> removed call to java/util/regex/Pattern::compile &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpNotMatch</span></span> Removed assignment to member variable fileRegexp &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_96'>96</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_96'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> Removed assignment to member variable checkPattern &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_97'>97</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_97'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndSourceNameCheckRegExpNotMatch</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_98'>98</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_98'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable checkRegexp &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_101'>101</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_101'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndSourceNameCheckRegExpNotMatch</span></span> removed call to java/util/regex/Pattern::compile &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndSourceNameCheckRegExpNotMatch</span></span> Removed assignment to member variable checkRegexp &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_103'>103</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_103'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable messagePattern &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_104'>104</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_104'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_105'>105</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_105'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable messageRegexp &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_108'>108</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_108'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed call to java/util/regex/Pattern::compile &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> Removed assignment to member variable messageRegexp &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_110'>110</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_110'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleNotEqual</span></span> Removed assignment to member variable moduleId &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_111'>111</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_111'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> Removed assignment to member variable linesCsv &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_112'>112</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_112'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_113'>113</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_113'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable lineFilter &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_116'>116</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_116'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::&#60;init&#62; &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> Removed assignment to member variable lineFilter &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_118'>118</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_118'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> Removed assignment to member variable columnsCsv &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_119'>119</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_119'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_120'>120</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_120'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable columnFilter &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_123'>123</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_123'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::&#60;init&#62; &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> Removed assignment to member variable columnFilter &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_139'>139</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_139'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingFileRegexp</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_140'>140</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_140'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable filePattern &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_141'>141</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_141'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable fileRegexp &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_144'>144</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_144'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> removed call to java/util/regex/Pattern::pattern &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable filePattern &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_145'>145</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_145'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingFileRegexp</span></span> Removed assignment to member variable fileRegexp &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_147'>147</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_147'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testMatchingModuleId</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_148'>148</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_148'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable checkPattern &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_149'>149</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_149'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable checkRegexp &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_152'>152</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_152'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> removed call to java/util/regex/Pattern::pattern &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable checkPattern &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_153'>153</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_153'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> Removed assignment to member variable checkRegexp &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_155'>155</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_155'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNotMatchingMessage</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_156'>156</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_156'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable messagePattern &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_157'>157</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_157'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable messageRegexp &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_160'>160</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_160'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> removed call to java/util/regex/Pattern::pattern &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable messagePattern &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_161'>161</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_161'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNotMatchingMessage</span></span> Removed assignment to member variable messageRegexp &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_163'>163</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_163'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingModuleId</span></span> Removed assignment to member variable moduleId &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_164'>164</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_164'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingLineNumber</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_165'>165</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_165'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable linesCsv &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_166'>166</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_166'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable lineFilter &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_169'>169</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_169'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable linesCsv &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_170'>170</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_170'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingLineNumber</span></span> removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::&#60;init&#62; &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingLineNumber</span></span> Removed assignment to member variable lineFilter &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_172'>172</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_172'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingColumnNumber</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_173'>173</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_173'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable columnsCsv &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_174'>174</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_174'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable columnFilter &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_177'>177</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_177'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>none</span></span> Removed assignment to member variable columnsCsv &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_178'>178</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_178'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingColumnNumber</span></span> removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::&#60;init&#62; &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingColumnNumber</span></span> Removed assignment to member variable columnFilter &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_184'>184</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_184'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed call to com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isFileNameAndModuleNameMatching &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::accept &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_185'>185</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_185'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed call to com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isMessageNameMatching &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_186'>186</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_186'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed call to com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isLineAndColumnMatching &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>accept<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_196'>196</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_196'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpNotMatch</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getFileName &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpNotMatch</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull</span></span> replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isFileNameAndModuleNameMatching &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_197'>197</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_197'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpNotMatch</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingMessageNull</span></span> removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getFileName &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingMessageNull</span></span> removed call to java/util/regex/Pattern::matcher &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed call to java/util/regex/Matcher::find &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpNotMatch</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_198'>198</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_198'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingMessageNull</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleNotEqual</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getViolation &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleNotEqual</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingMessageNull</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_199'>199</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_199'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleNotEqual</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleEqual</span></span> removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getModuleId &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleEqual</span></span> removed call to java/lang/String::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleEqual</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndSourceNameCheckRegExpNotMatch</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleNotEqual</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_200'>200</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_200'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideViolation</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideViolation</span></span> removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getSourceName &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideViolation</span></span> removed call to java/util/regex/Pattern::matcher &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideViolation</span></span> removed call to java/util/regex/Matcher::find &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideViolation</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>isFileNameAndModuleNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndSourceNameCheckRegExpNotMatch</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_210'>210</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_210'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isMessageNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isMessageNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isMessageNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getMessage &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>isMessageNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed call to java/util/regex/Pattern::matcher &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>isMessageNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed call to java/util/regex/Matcher::find &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>isMessageNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>isMessageNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>isMessageNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>9.<span><b>9</b><br/><b>Location : </b>isMessageNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>10.<span><b>10</b><br/><b>Location : </b>isMessageNameMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage</span></span> replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isMessageNameMatching &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_220'>220</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_220'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>9.<span><b>9</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>10.<span><b>10</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::isLineAndColumnMatching &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_221'>221</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_221'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getLine &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::accept &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_222'>222</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_222'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> removed call to com/puppycrawl/tools/checkstyle/api/AuditEvent::getColumn &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> removed call to com/puppycrawl/tools/checkstyle/filters/CsvFilterElement::accept &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>isLineAndColumnMatching<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_227'>227</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_227'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hashCode<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEqualsAndHashCode</span></span> removed call to java/util/Objects::hash &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>hashCode<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEqualsAndHashCode</span></span> replaced int return with 0 for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::hashCode &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_233'>233</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_233'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_234'>234</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_234'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEqualsAndHashCode</span></span> replaced boolean return with false for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::equals &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_236'>236</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_236'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed call to java/lang/Object::getClass &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed call to java/lang/Object::getClass &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEqualsAndHashCode</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEqualsAndHashCode</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_237'>237</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_237'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEqualsAndHashCode</span></span> replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::equals &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_240'>240</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_240'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed call to java/util/Objects::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEqualsAndHashCode</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> replaced boolean return with true for com/puppycrawl/tools/checkstyle/filters/SuppressFilterElement::equals &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_241'>241</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_241'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed call to java/util/Objects::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_242'>242</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_242'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed call to java/util/Objects::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEqualsAndHashCode</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_243'>243</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_243'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed call to java/util/Objects::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEqualsAndHashCode</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_244'>244</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_244'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed call to java/util/Objects::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@53073395_245'>245</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@53073395_245'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed call to java/util/Objects::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+
+<li class='mutator'>CONSTRUCTOR_CALLS</li>
+
+<li class='mutator'>EMPTY_RETURNS</li>
+
+<li class='mutator'>EXPERIMENTAL_ARGUMENT_PROPAGATION</li>
+
+<li class='mutator'>EXPERIMENTAL_BIG_DECIMAL</li>
+
+<li class='mutator'>EXPERIMENTAL_BIG_INTEGER</li>
+
+<li class='mutator'>EXPERIMENTAL_MEMBER_VARIABLE</li>
+
+<li class='mutator'>EXPERIMENTAL_NAKED_RECEIVER</li>
+
+<li class='mutator'>EXPERIMENTAL_REMOVE_SWITCH_MUTATOR_[0-99]</li>
+
+<li class='mutator'>EXPERIMENTAL_SWITCH</li>
+
+<li class='mutator'>FALSE_RETURNS</li>
+
+<li class='mutator'>INCREMENTS</li>
+
+<li class='mutator'>INVERT_NEGS</li>
+
+<li class='mutator'>MATH</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+
+<li class='mutator'>NON_VOID_METHOD_CALLS</li>
+
+<li class='mutator'>NULL_RETURNS</li>
+
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_ELSE</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_IF</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_ELSE</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_IF</li>
+
+<li class='mutator'>REMOVE_INCREMENTS</li>
+
+<li class='mutator'>TRUE_RETURNS</li>
+
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingCheckRegExpMatch (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionFilterTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.filters.SuppressionFilterTest]/[method:testAcceptFalse()] (6 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingChecks (8 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionsLoaderTest.testSettingModuleId (2 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testMatchMessage (13 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionsLoaderTest.testInvalidFileFormat (3 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingModuleId (12 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testMatchingModuleId (9 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionsLoaderTest.testBadInt (3 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByLine (1 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpMatch (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingFileRegexp (13 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEqualsAndHashCode (39 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByColumn (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingMessageNull (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingRegExpNotMatch (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingLineNumber (15 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNotMatchingMessage (11 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionsLoaderTest.testNoCheckYesId (3 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionFilterTest.[engine:junit-jupiter]/[class:com.puppycrawl.tools.checkstyle.filters.SuppressionFilterTest]/[method:testExistingInvalidSuppressionFileWithTrueOptional()] (8 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionsLoaderTest.testMultipleSuppression (2 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByMessage (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingCheckRegExpNotMatch (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideViolation (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testEquals (1 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleNull (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleEqual (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testDefault (16 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndSourceNameCheckRegExpNotMatch (2 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testNonMatchingColumnNumber (11 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingModuleNotEqual (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideByFileNameAndModuleMatchingFileNameNull (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressFilterElementTest.testDecideDefault (0 ms)</li><li>com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilterTest.testMatching (13 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.9.9
+
+</body>
+</html>
